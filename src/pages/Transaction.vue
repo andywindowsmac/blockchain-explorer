@@ -97,7 +97,7 @@
         const self = this;
 
         this.$http.get('/public/api/explorer/v1/transactions?hash=' + this.hash).then(response => {
-          self.content = response.data.message;
+          self.content = response.data.content;
           self.location = response.data.location;
           self.type = response.data.type;
           self.status = response.data.status;

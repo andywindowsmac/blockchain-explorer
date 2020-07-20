@@ -180,7 +180,7 @@
           self.tx_hash = response.data.tx_hash;
           self.state_hash = response.data.state_hash;
           self.error_hash = response.data.error_hash;
-          self.proposer_id = response.data.additional_headers.headers.proposer_id[0];
+          self.proposer_id = response.data.proposer_id;
           self.precommits = response.data.precommits;
           self.time = response.data.time;
           self.transactions = response.data.txs

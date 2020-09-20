@@ -29,6 +29,7 @@ app.use(express.static(__dirname + '/'));
 // Public proxy middleware options
 const publicApiProxy = createProxyMiddleware({
   target: publicApiRoot,
+  changeOrigin: true,
   ws: true,
   pathRewrite: {
     '^/public/api': '/api' // remove base path
@@ -38,9 +39,10 @@ const publicApiProxy = createProxyMiddleware({
 // Private proxy middleware options
 const privateApiProxy = createProxyMiddleware({
   target: privateApiRoot,
+  changeOrigin: true,
   pathRewrite: {
     '^/private/api': '/api' // remove base path
-  }
+  },
 });
 
 app.use('/public/api', publicApiProxy);

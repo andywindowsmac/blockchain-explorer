@@ -137,6 +137,8 @@
 </template>
 
 <script>
+  const envValues = require('../env.js')
+
   module.exports = {
     props: {
       height: {
@@ -174,7 +176,7 @@
       loadBlock: function() {
         const self = this
 
-        this.$http.get('/public/api/explorer/v1/block?height=' + this.height).then(response => {
+        this.$http.get(envValues.VUE_APP_ROOT_PATH + 'api/explorer/v1/block?height=' + this.height).then(response => {
           self.tx_count = response.data.tx_count;
           self.prev_hash = response.data.prev_hash;
           self.tx_hash = response.data.tx_hash;

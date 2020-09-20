@@ -66,6 +66,8 @@
 </template>
 
 <script>
+  const envValues = require('../env.js')
+
   const POOLING_INTERVAL = 3000;
   const PER_PAGE = 10;
 
@@ -81,7 +83,8 @@
     methods: {
       loadStats: function() {
         const self = this;
-        this.$http.get('/private/api/system/v1/stats').then(response => {
+        console.log(process)
+        this.$http.get(envValues.VUE_APP_ROOT_PATH + 'private/api/system/v1/stats').then(response => {
           self.storage_info = response.data;
           setTimeout(self.loadStats, POOLING_INTERVAL)
         }).catch(error => {
@@ -101,7 +104,7 @@
           suffix += '&skip_empty_blocks=true'
         }
 
-        this.$http.get('/public/api/explorer/v1/blocks?count=' + PER_PAGE + suffix).then(response => {
+        this.$http.get(envValues.VUE_APP_ROOT_PATH + 'api/explorer/v1/blocks?count=' + PER_PAGE + suffix).then(response => {
           self.blocks = self.blocks.concat(response.data.blocks);
           self.webSocket = new WebSocket(`ws://${window.location.host}/public/api/explorer/v1/blocks/subscribe`);
           self.webSocket.onmessage = self.handleNewBlock
